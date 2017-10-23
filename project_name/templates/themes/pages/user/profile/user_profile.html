@@ -1,0 +1,177 @@
+{% extends "themes/pages/user/partial/base_user.html" %}
+{% load i18n %}
+{% load static %}
+{% load filter %}
+
+{% block content_user %}
+    <div class="panel panel-flat">
+        <div class="panel-heading">
+            <div class="heading-elements">
+                <ul class="icons-list">
+                    <li><a data-action="reload"></a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="panel-body">
+            <form id="profile_form" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <fieldset>
+                    <legend class="text-semibold">
+                        <i class="icon-file-text2 position-left"></i>
+                        {% trans "personal information" %}
+                        <a class="control-arrow" data-toggle="collapse"
+                           data-target="#demo1">
+                            <i class="icon-circle-down2"></i>
+                        </a>
+                    </legend>
+
+                    <div class="collapse in" id="demo1">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    {{ profile_form.firstName.label_tag }}
+                                    {{ profile_form.firstName|add_class_form_control }}
+
+                                </div>
+                                <div class="col-md-4">
+                                    {{ profile_form.lastName.label_tag }}
+                                    {{ profile_form.lastName|add_class_form_control }}
+                                </div>
+                                <div class="col-md-4">
+                                    {{ profile_form.genderTypeId.label_tag }}
+                                    <select name="{{ profile_form.genderTypeId.name }}"
+                                            id="id_{{ profile_form.genderTypeId.name }}" class="form-control select2">
+                                        <option value="">{% trans "--- choose value ---" %}</option>
+                                        {% for choice in profile_form.genderTypeId.field.queryset %}
+                                            <option value="{{ choice.typeId }}"
+                                                {% if profile_form.genderTypeId.value|safe == choice.typeId|safe %} selected="selected"{% endif %}>
+                                                {% blocktrans with name=choice.name x=profile_form.genderTypeId.userId  %}{{ name }} {{ x }} {% endblocktrans %}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    {{ profile_form.mobilePhone.label_tag }}
+                                    {{ profile_form.mobilePhone|add_class_form_control }}
+                                </div>
+
+                                <div class="col-md-6">
+                                    {{ profile_form.homePhone.label_tag }}
+                                    {{ profile_form.homePhone|add_class_form_control }}
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend class="text-semibold">
+                        <i class="icon-file-text2 position-left"></i>
+                        {% trans "personal information details" %}s
+                        <a class="control-arrow" data-toggle="collapse"
+                           data-target="#demo2">
+                            <i class="icon-circle-down2"></i>
+                        </a>
+                    </legend>
+                    <div class="collapse in" id="demo2">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    {{ profile_form.documentIdentityTypeId.label_tag }}
+                                    <select name="{{ profile_form.documentIdentityTypeId.name }}"
+                                            id="id_{{ profile_form.documentIdentityTypeId.name }}"
+                                            class="form-control select2">
+                                        <option value="">{% trans "--- choose value ---" %}</option>
+                                        {% for choice in profile_form.documentIdentityTypeId.field.queryset %}
+                                            <option value="{{ choice.typeId }}"
+                                                {% if profile_form.documentIdentityTypeId.value|safe == choice.typeId|safe %} selected="selected"{% endif %}>
+                                                {% blocktrans with name=choice.name %}{{ name }}{% endblocktrans %}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+
+                                </div>
+                                <div class="col-md-6">
+                                    {{ profile_form.documentIdentityNumber.label_tag }}
+                                    {{ profile_form.documentIdentityNumber|add_class_form_control }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    {{ profile_form.countryId.label_tag }}
+                                    <select name="{{ profile_form.countryId.name }}"
+                                            id="id_{{ profile_form.countryId.name }}" class="form-control select2">
+                                        <option value="">{% trans "--- choose value ---" %}</option>
+                                        {% for choice in profile_form.countryId.field.queryset %}
+                                            <option value="{{ choice.countryId }}"
+                                                 {% if profile_form.countryId.value|safe == choice.countryId|safe %} selected="selected"{% endif %}>
+                                                {% blocktrans with name=choice.name %}{{ name }}{% endblocktrans %}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+
+                                </div>
+                                <div class="col-md-6">
+                                    {{ profile_form.logoProfile.label_tag }}
+                                    {{ profile_form.logoProfile|add_class_form_file }}
+                                    <span class="help-block">Accepted formats: png, jpg. Max file size 3Mb</span>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    {{ profile_form.address.label_tag }}
+                                    {{ profile_form.address|add_class_form_control }}
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group hidden">
+                            {% for hidden_field in profile_form.hidden_fields %}
+                                {% if hidden_field.errors %}
+                                    <ul>
+                                        {% for error in hidden_field.errors %}
+                                            <li>(Hidden field {{ hidden_field.name }}) {{ error }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                                {{ hidden_field }}
+                            {% endfor %}
+                        </div>
+
+                    </div>
+                </fieldset>
+
+
+                <div class="text-right">
+                    <button id="btn_profile" type="submit" class="btn btn-primary">{% trans 'save' %}</button>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+{% endblock content_user %}
+
+
+{% block js_plugins_after %}
+{% endblock js_plugins_after %}
+
+{% block js_plugins_before %}
+    <script src="{% static 'themes/pages/user/user_profile.js' %}"></script>
+{% endblock js_plugins_before %}
+
+

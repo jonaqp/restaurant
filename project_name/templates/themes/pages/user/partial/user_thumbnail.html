@@ -1,0 +1,20 @@
+{% load i18n %}
+{% load static %}
+
+<div class="thumbnail">
+    <div class="thumb thumb-rounded thumb-slide">
+        <img src="{{ user.get_profile.get_logo_profile_url }}">
+        <div class="caption">
+        <span>
+            <a href="{{ user.get_profile.get_logo_profile_url }}" class="btn bg-success-400 btn-icon btn-xs"
+               data-popup="lightbox"><i class="icon-plus2"></i></a>
+        </span>
+        </div>
+    </div>
+
+    <div class="caption text-center">
+        <h6 class="text-semibold no-margin">
+            Kas Peru <small class="display-block">Administrador</small>
+        </h6>
+    </div>
+</div>

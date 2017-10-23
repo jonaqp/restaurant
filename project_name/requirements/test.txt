@@ -1,0 +1,10 @@
+-r base.txt
+
+coverage==4.2
+flake8
+django-test-plus
+factory-boy
+pytest-django
+pytest-sugar
+
+django_jenkins

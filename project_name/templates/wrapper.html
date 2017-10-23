@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block class_body %}
+    {{ block.super }}
+{% endblock class_body %}
+
+{% block header %}
+    {{ block.super }}
+{% endblock header %}
+
+{% block content %}
+    {% block page-content-siderbar %}
+        {{ block.super }}
+    {% endblock page-content-siderbar %}
+
+    {% block page-content-wrapper %}
+        <div class="content-wrapper">
+            {% block sidebar_page_header %}
+                {{ block.super }}
+            {% endblock sidebar_page_header %}
+
+            {% block sidebar_page_content %}
+                <div class="content">
+                    {% block sidebar1_page %}
+                    {% endblock sidebar1_page %}
+
+                    {% block sidebar2_page %}
+                    {% endblock sidebar2_page %}
+                </div>
+            {% endblock sidebar_page_content %}
+        </div>
+    {% endblock page-content-wrapper %}
+
+{% endblock content %}
+
+{% block footer %}
+    {{ block.super }}
+{% endblock footer %}
+
+{% block js_plugins_after %}
+{% endblock js_plugins_after %}
+
+{% block js_plugins_before %}
+{% endblock js_plugins_before %}
+

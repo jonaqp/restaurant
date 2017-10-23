@@ -1,0 +1,66 @@
+{% extends "account/base.html" %}
+{% load i18n %}
+{#{% load user socialaccount %}#}
+{% load filter %}
+{% load static %}
+{% block content %}
+    {% block page-content-siderbar %}
+    {% endblock page-content-siderbar %}
+
+    {% block page-content-wrapper %}
+        <div class="content-wrapper">
+            {% block sidebar_page_header %}
+            {% endblock sidebar_page_header %}
+
+            {% block sidebar_page_content %}
+                <div class="content">
+                    <form method="post" action="{% url 'account_signup' %}">
+                        {% csrf_token %}
+                        <div class="panel panel-body login-form">
+                             <div class="text-center">
+                                <h1 class="content-group">
+                                    {% trans "SIGN UP" %}
+                                    <p class="help-block no-margin">{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+                                </h1>
+                            </div>
+
+                            <div class="form-group has-feedback has-feedback-left">
+                                {{ form.email|add_class:"form-control" }}
+                                <div class="form-control-feedback">
+                                    <i class="icon-user text-muted"></i>
+                                </div>
+                            </div>
+
+                            <div class="form-group has-feedback has-feedback-left">
+                                {{ form.password1|add_class:"form-control" }}
+                                <div class="form-control-feedback">
+                                    <i class="icon-lock2 text-muted"></i>
+                                </div>
+                            </div>
+                             <div class="form-group has-feedback has-feedback-left">
+                                {{ form.password2|add_class:"form-control" }}
+                                <div class="form-control-feedback">
+                                    <i class="icon-lock2 text-muted"></i>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                 {% if redirect_field_value %}
+                                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                                 {% endif %}
+                                <button type="submit" class="btn btn-primary btn-block">
+                                    {% trans "Sign Up" %} <i class="icon-circle-right2 position-right"></i>
+                                </button>
+
+                            </div>
+                        </div>
+                    </form>
+                   <div class="footer text-muted text-center">
+						KassPeru © 2015.
+					</div>
+                </div>
+            {% endblock sidebar_page_content %}
+        </div>
+    {% endblock page-content-wrapper %}
+{% endblock %}

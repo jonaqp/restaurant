@@ -1,0 +1,104 @@
+{% extends "account/base.html" %}
+{% load i18n %}
+{% load filter %}
+{% load static %}
+{% block content %}
+    {% block page-content-siderbar %}
+    {% endblock page-content-siderbar %}
+
+    {% block page-content-wrapper %}
+        <div class="content-wrapper">
+            {% block sidebar_page_header %}
+            {% endblock sidebar_page_header %}
+
+            {% block sidebar_page_content %}
+                <div class="content">
+                    <form method="post" action="{% url 'account_login' %}">
+                        {% csrf_token %}
+                        <div class="panel panel-body login-form">
+
+                            {% if form.errors and not form.non_field_errors %}
+                                <div class="alert alert-danger alert-styled-left alert-bordered">
+                                    <button type="button" class="close" data-dismiss="alert"><span>&times;</span><span class="sr-only">Close</span></button>
+                                    {% if form.errors.items|length == 1 %}{% trans "Please correct the error below." %}{% else %}{% trans "Please correct the errors below." %}{% endif %}
+                                </div>
+                            {% endif %}
+
+                            {% if form.non_field_errors %}
+                                <div class="alert alert-info alert-styled-left alert-bordered">
+                                    <button type="button" class="close" data-dismiss="alert"><span>&times;</span><span class="sr-only">Close</span></button>
+                                    {% for error in form.non_field_errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                            {% if user.is_authenticated %}
+                                <div class="alert alert-info alert-styled-left alert-bordered">
+                                    <button type="button" class="close" data-dismiss="alert"><span>&times;</span><span class="sr-only">Close</span></button>
+                                    {% blocktrans with username=request.user.get_username trimmed %}
+                                    You are authenticated as {{ username }}, but are not authorized to
+                                    access this page. Would you like to login to a different account?
+                                    {% endblocktrans %}
+                                </div>
+                            {% endif %}
+
+                            <div class="text-center">
+                                <div class="icon-object border-slate-300 text-slate-300">
+                                    <img class="img-responsive img-thumbnail img-circle" src="{% static "themes/logo/logo_login.png" %}" alt="">
+                                </div>
+                                <h5 class="content-group">{% trans 'Login to your user' %}
+                                    <small class="display-block">{% trans 'Enter your credentials below' %}</small>
+                                </h5>
+                            </div>
+                            <div class="form-group has-feedback has-feedback-left">
+                                {{ form.login|add_class:"form-control" }}
+                                <div class="form-control-feedback">
+                                    <i class="icon-user text-muted"></i>
+                                </div>
+                            </div>
+
+                            <div class="form-group has-feedback has-feedback-left">
+                                {{ form.password|add_class:"form-control" }}
+                                <div class="form-control-feedback">
+                                    <i class="icon-lock2 text-muted"></i>
+                                </div>
+                            </div>
+
+                            <div class="form-group login-options">
+								<div class="row">
+									<div class="col-sm-6 col-md-5">
+										<label class="checkbox-inline">
+											<div class="checker">
+                                                 {{ form.remember|add_class:"styled" }}
+                                            </div>
+											Remember
+										</label>
+									</div>
+
+									<div class="col-sm-6 col-md-7 text-right">
+										<a href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+									</div>
+								</div>
+							</div>
+
+
+                             {% if redirect_field_value %}
+                                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                            {% endif %}
+
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary btn-block">Entrar <i
+                                        class="icon-circle-right2 position-right"></i></button>
+
+                            </div>
+                        </div>
+                    </form>
+                    <div class="footer text-muted text-center">
+						KassPeru © 2015.
+					</div>
+                </div>
+            {% endblock sidebar_page_content %}
+        </div>
+    {% endblock page-content-wrapper %}
+{% endblock %}

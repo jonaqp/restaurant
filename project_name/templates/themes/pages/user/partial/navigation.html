@@ -1,0 +1,29 @@
+{% load i18n %}
+
+<div class="panel panel-flat">
+    <div class="list-group no-border no-padding-top">
+        <a href="{% url 'user_app:profile' uid=user.get_profile.uid %}" class="list-group-item">
+            <i class="icon-user"></i> {% trans 'my profile' %}
+        </a>
+{#        <a href="{% url 'user_app:company' %}" class="list-group-item">#}
+{#            <i class="icon-home9"></i> My company#}
+{#        </a>#}
+{#        <a href="{% url 'user_app:coin-kas' %}" class="list-group-item">#}
+{#            <i class="icon-cash3"></i> My coin-kas#}
+{#        </a>#}
+{#        <a href="{% url 'user_app:invited' uid=user.get_profile.uid %}" class="list-group-item">#}
+{#            <i class="icon-tree7"></i> {% trans 'my guest' %}#}
+{#        </a>#}
+{#        <a href="{% url 'user_app:token' %}" class="list-group-item">#}
+{#            <i class="icon-users"></i> Code Association#}
+{#        </a>#}
+
+{#        <a href="{% url 'user_app:company-tree' %}" class="list-group-item">#}
+{#            <i class="icon-users"></i> Tree Company Consumed#}
+{#        </a>#}
+        <div class="list-group-divider"></div>
+        <a href="{% url 'user_app:password' uid=user.get_profile.uid %}" class="list-group-item">
+            <i class="icon-cog3"></i> {% trans 'change password' %}
+        </a>
+    </div>
+</div>

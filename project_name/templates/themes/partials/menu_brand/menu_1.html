@@ -1,0 +1,27 @@
+{% load i18n %}
+{% load active_tag %}
+{% load filter %}
+{% if result %}
+    <li class="navigation-header">
+        <span>Main</span> <i class="icon-menu" title="Main pages"></i>
+    </li>
+    {% for k, v in result.items %}
+        <li class="{% add_active v.0.module.urlname %}">
+            <a href="{% if v.0.module.match == '#' %}javascript:;{% else %}{{ v.0.module.match }}{% endif %}">
+                <i class="{{ v.0.module.icon }}"></i> <span>{{ v.0.module.text }}</span>
+            </a>
+
+            {% if v.0.module.submodule %}
+                <ul>
+                    {% for k1, v1 in v.0.module.submodule.items %}
+                        <li>
+                            <a href="{% if v1.0.match == '#' %}javascript:;{% else %}{{ v1.0.match }}{% endif %}">
+                                {{ v1.0.text }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </li>
+    {% endfor %}
+{% endif %}

@@ -1,0 +1,37 @@
+{% extends "account/base.html" %}
+{% load i18n %}
+{% load filter %}
+{% load static %}
+{% block content %}
+    {% block page-content-siderbar %}
+    {% endblock page-content-siderbar %}
+
+    {% block page-content-wrapper %}
+        <div class="content-wrapper">
+            {% block sidebar_page_header %}
+            {% endblock sidebar_page_header %}
+
+            {% block sidebar_page_content %}
+                <div class="content">
+                     <form>
+                        <div class="panel panel-body col-md-6 col-md-offset-3">
+
+                            <div class="form-group text-center">
+                                <h1>{% trans "Sign Up Closed" %}</h1>
+                                <p class="no-margin">{% trans "We are sorry, but the sign up is currently closed." %}</p>
+                            </div>
+                            <div class="form-group">
+                                <a href="{% url 'account_login' %}" class="btn btn-primary btn-block">
+                                    Back <i class="icon-arrow-right14 position-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="footer text-muted text-center">
+						{{ project_name }} © 2015.
+					</div>
+                </div>
+            {% endblock sidebar_page_content %}
+        </div>
+    {% endblock page-content-wrapper %}
+{% endblock %}

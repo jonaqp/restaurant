@@ -1,0 +1,37 @@
+{% extends "account/base.html" %}
+{% load i18n %}
+{% load account socialaccount %}
+{% load filter %}
+{% load static %}
+{% block content %}
+    {% block page-content-siderbar %}
+    {% endblock page-content-siderbar %}
+
+    {% block page-content-wrapper %}
+        <div class="content-wrapper">
+            {% block sidebar_page_header %}
+            {% endblock sidebar_page_header %}
+
+            {% block sidebar_page_content %}
+                <div class="content">
+                     <div class="text-center content-group">
+						<h1 class="error-title">400</h1>
+						<h5>Oops, an error has occurred. Forbidden!</h5>
+					</div>
+                    <div class="row">
+						<div class="col-lg-4 col-lg-offset-5">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <a href="/" class="btn btn-primary btn-block content-group"><i class="icon-circle-left2 position-left"></i> Go to dashboard</a>
+                                </div>
+                            </div>
+						</div>
+					</div>
+                    <div class="footer text-muted text-center">
+						{{ project_name }} © 2015.
+					</div>
+                </div>
+            {% endblock sidebar_page_content %}
+        </div>
+    {% endblock page-content-wrapper %}
+{% endblock %}
