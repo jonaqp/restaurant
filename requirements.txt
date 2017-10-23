@@ -1,1 +1,1 @@
--r sip_client/requirements/prod.txt
+-r project_name/requirements/prod.txt
