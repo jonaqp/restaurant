@@ -94,3 +94,4 @@ ENV/
 /project_name/run/static/
 /manage.py
 /project_name/config/wsgi.py
+/.gitignore
