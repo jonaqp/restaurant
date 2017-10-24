@@ -13,11 +13,16 @@ TEMPLATES[0]['OPTIONS']['loaders'] = [
 
 SECRET_KEY = SECRET_FILE
 
+
 DATABASES = {
-    'default': env.db("DATABASE_URL"),
+    'default': env.db("SQLITE_URL"),
 }
-DATABASES['default']['ATOMIC_REQUESTS'] = True
-DATABASES['default']['CONN_MAX_AGE'] = 10
+
+# DATABASES = {
+#     'default': env.db("DATABASE_URL"),
+# }
+# DATABASES['default']['ATOMIC_REQUESTS'] = True
+# DATABASES['default']['CONN_MAX_AGE'] = 10
 
 CACHES = {
     'default': env.cache(),
@@ -60,13 +65,24 @@ CSRF_COOKIE_HTTPONLY = True
 X_FRAME_OPTIONS = 'DENY'
 
 
+AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME')
+AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+AWS_PRELOAD_METADATA = True
+
+STATICFILES_LOCATION = 'static'
+STATIC_URL = u"https://{0:s}/{1:s}/".format(AWS_S3_CUSTOM_DOMAIN,
+                                            STATICFILES_LOCATION)
+STATICFILES_STORAGE = 'project_name.apps.core.utils.storages.StaticStorage'
+
+MEDIAFILES_LOCATION = 'media'
+MEDIA_URL = u"https://{0:s}/{1:s}/".format(AWS_S3_CUSTOM_DOMAIN,
+                                           MEDIAFILES_LOCATION)
+DEFAULT_FILE_STORAGE = 'project_name.apps.core.utils.storages.MediaStorage'
+
 LOGGING['loggers'].update({
-    # '': {
-    #     'handlers': ['sentry'],
-    #     'level': 'ERROR',
-    #     'propagate': False,
-    # },
-    '{{ project_name|lower }}': {
+    'project_name': {
         'handlers': ['project'],
         'level': 'WARNING',
         'propagate': True,
