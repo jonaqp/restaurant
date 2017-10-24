@@ -25,7 +25,6 @@ DATABASES = {
 
 CACHES = {
     'default': env.cache(),
-    'redis': env.cache('REDIS_URL')
 }
 
 DJANGO_APPS = ()

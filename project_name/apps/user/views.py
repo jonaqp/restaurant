@@ -1,7 +1,8 @@
-from project_name.apps.core.mixins import TemplateLoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import TemplateView
 
 
-class IndexView(TemplateLoginRequiredMixin):
+class IndexView(LoginRequiredMixin, TemplateView):
     template_name = 'themes/pages/home/home.html'
 
     def get(self, request, *args, **kwargs):
