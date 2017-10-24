@@ -1,9 +1,7 @@
 -r base.txt
 
-#WSGI
-gunicorn
-
 
 #AWS
 boto3
+django-storages
 

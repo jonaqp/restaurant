@@ -13,7 +13,6 @@ TEMPLATES[0]['OPTIONS']['loaders'] = [
 
 SECRET_KEY = SECRET_FILE
 
-
 DATABASES = {
     'default': env.db("SQLITE_URL"),
 }
@@ -45,13 +44,11 @@ EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND')
 EMAIL_CONFIG = env.email_url('EMAIL_URL')
 vars().update(EMAIL_CONFIG)
 
-
 # Caching sessions.
 SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 SESSION_CACHE_ALIAS = "default"
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
 
 SECURE_HSTS_SECONDS = 60
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
@@ -64,22 +61,21 @@ CSRF_COOKIE_SECURE = True
 CSRF_COOKIE_HTTPONLY = True
 X_FRAME_OPTIONS = 'DENY'
 
-
 AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME')
 AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 AWS_PRELOAD_METADATA = True
 
-STATICFILES_LOCATION = 'static'
-STATIC_URL = u"https://{0:s}/{1:s}/".format(AWS_S3_CUSTOM_DOMAIN,
-                                            STATICFILES_LOCATION)
-STATICFILES_STORAGE = 'project_name.apps.core.utils.storages.StaticStorage'
+AWS_STATIC_LOCATION = 'static'
+STATICFILES_STORAGE = 'mysite.storage_backends.StaticStorage'
+STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, AWS_STATIC_LOCATION)
 
-MEDIAFILES_LOCATION = 'media'
-MEDIA_URL = u"https://{0:s}/{1:s}/".format(AWS_S3_CUSTOM_DOMAIN,
-                                           MEDIAFILES_LOCATION)
-DEFAULT_FILE_STORAGE = 'project_name.apps.core.utils.storages.MediaStorage'
+AWS_PUBLIC_MEDIA_LOCATION = 'media/public'
+DEFAULT_FILE_STORAGE = 'project_name.apps.core.utils.storages.PublicMediaStorage'
+
+AWS_PRIVATE_MEDIA_LOCATION = 'media/private'
+PRIVATE_FILE_STORAGE = 'project_name.apps.core.utils.storages.PrivateMediaStorage'
 
 LOGGING['loggers'].update({
     'project_name': {
