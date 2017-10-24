@@ -68,7 +68,7 @@ AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 AWS_PRELOAD_METADATA = True
 
 AWS_STATIC_LOCATION = 'static'
-STATICFILES_STORAGE = 'mysite.storage_backends.StaticStorage'
+STATICFILES_STORAGE = 'project_name.apps.core.utils.storages.StaticStorage'
 STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, AWS_STATIC_LOCATION)
 
 AWS_PUBLIC_MEDIA_LOCATION = 'media/public'
