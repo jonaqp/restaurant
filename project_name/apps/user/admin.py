@@ -8,19 +8,6 @@ from django.utils.translation import ugettext_lazy as _
 from .models import User
 
 
-# class UserProfileAdminInline(admin.StackedInline):
-#     model = UserProfile
-#     fields = ["address",
-#               # "genderType",
-#               "homePhone", "mobilePhone",
-#               "logoProfile"
-#               # "country", "space_plan"
-#               ]
-#     can_delete = False
-#     verbose_name_plural = 'Profile'
-#     fk_name = 'userId'
-
-
 class UserCreationForm(forms.ModelForm):
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Password confirmation',
@@ -89,5 +76,4 @@ class MyUserAdmin(UserAdmin):
 
 
 admin.site.register(User, MyUserAdmin)
-
 admin.site.unregister(Group)

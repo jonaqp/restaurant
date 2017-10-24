@@ -12,6 +12,7 @@ from project_name.apps.core.models import (
 from project_name.apps.core.utils.fields import (
     BaseModel, BaseUUIDModel, BaseAuthUUIDModel
 )
+from project_name.apps.userprofile.models import UserProfile
 
 AUTH_USER_MODEL = getattr(settings, 'AUTH_USER_MODEL', 'auth.User')
 
@@ -81,7 +82,7 @@ class CustomUser(AbstractBaseUser):
 
     @property
     def get_profile(self):
-        profile = UserProfile.objects.select_related('userId').get(pk=self)
+        profile = UserProfile.objects.select_related('pk').get(pk=self)
         return profile
 
     @property

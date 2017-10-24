@@ -75,6 +75,10 @@ SESSION_COOKIE_SECURE = False
 SESSION_COOKIE_HTTPONLY = False
 CSRF_COOKIE_SECURE = False
 
+AWS_STATIC_LOCATION = 'static'
+AWS_PUBLIC_MEDIA_LOCATION = 'media/public'
+AWS_PRIVATE_MEDIA_LOCATION = 'media/private'
+
 LOGGING['loggers'].update({
     'project_name': {
         'handlers': ['console'],
