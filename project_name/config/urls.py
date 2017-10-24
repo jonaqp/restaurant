@@ -11,7 +11,6 @@ urlpatterns = i18n_patterns(
     url(r'^', include('project_name.apps.core.urls', namespace="core_app")),
     url(r'^rest-auth/', include('rest_auth.urls')),
     url(r'^users/', include('project_name.apps.user.urls', namespace="user_app")),
-
 )
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
