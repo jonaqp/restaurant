@@ -1,5 +1,3 @@
-from django.views.generic import TemplateView
-
 from project_name.apps.core.mixins import TemplateLoginRequiredMixin
 
 
