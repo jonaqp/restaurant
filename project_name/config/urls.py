@@ -8,9 +8,9 @@ from django.views import defaults as default_views
 urlpatterns = i18n_patterns(
     url(settings.ADMIN_URL, include(admin.site.urls)),
     url(r'^rest-auth/', include('rest_auth.urls')),
-    url(r'', include('allauth.urls')),
+    url(r'^', include('allauth.urls')),
     url(r'^', include('project_name.apps.core.urls', namespace="core_app")),
-    url(r'^', include('project_name.apps.user.urls', namespace="user_app")),
+    url(r'^user/', include('project_name.apps.user.urls', namespace="user_app")),
 
 )
 
