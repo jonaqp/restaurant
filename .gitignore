@@ -91,4 +91,6 @@ ENV/
 .idea/
 
 /node_modules/
-
+/project_name/run/static/
+/manage.py
+/project_name/config/wsgi.py
