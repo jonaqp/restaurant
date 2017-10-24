@@ -1,5 +1,10 @@
 -r base.txt
 
+#AWS
+boto3
+django-storages
+
+
 #Debugging
 ipdb
 ipython

@@ -10,6 +10,7 @@ from project_name.apps.core.utils.fields import (
     BaseUUIDModel
 )
 from project_name.apps.core.utils.upload_folder import upload_user_profile
+from project_name.apps.core.utils.storages import PublicMediaStorage
 
 AUTH_USER_MODEL = getattr(settings, 'AUTH_USER_MODEL', 'auth.User')
 
@@ -33,7 +34,8 @@ class UserProfile(BaseUUIDModel):
     mobilePhone = models.CharField(
         _('mobile phone'), max_length=50, blank=True, null=True)
     logoProfile = models.ImageField(
-        _('logo'), upload_to=upload_user_profile, blank=True, null=True)
+        _('logo'), storage=PublicMediaStorage,
+        upload_to=upload_user_profile, blank=True, null=True)
 
     def __str__(self):
         return force_text(self.userId.email)

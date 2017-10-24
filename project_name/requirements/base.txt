@@ -1,9 +1,11 @@
 #Core
 Django
 
+
 #WSGI HTTP Server
 gunicorn
 pytz
+
 
 #Configuration
 django-environ
@@ -13,9 +15,11 @@ Pillow
 psycopg2
 
 
-#Redis
+#Cache
 django-redis
 redis
+python3-memcached
+
 
 #Celery
 celery==3.1.24
@@ -25,14 +29,24 @@ celery==3.1.24
 django-allauth
 
 
+#Fields
 jsonfield
+
+
+#Cors
 django-cors-headers
+
+
+#Auth
 django-rest-auth
 djangorestframework
-django-floppyforms
 django-braces
 django-debug-toolbar-request-history
-python3-memcached
+
+
+#Forms
+django-floppyforms
+
 
 #Mail
 html2text
